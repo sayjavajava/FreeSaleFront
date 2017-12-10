@@ -1,0 +1,52 @@
+.alert-info{
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+
+.alert {
+    background:red;
+    font-size: .9em;
+    font-family:'Times New Roman', Times, serif;
+    padding-left: 10%;
+    
+    display: inline-block;
+ margin-bottom: 10px;
+ margin-left: 10%;
+ max-width: 40%;
+ align-self: center;
+ padding: 2px;
+    animation: 2s alertAnim forwards;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 90%;
+  }
+
+  mat-form-field.mat-form-field {
+    font-size: 16px;
+   width: 50%;  
+   margin-top: 15px;
+   padding-left: 10%; 
+
+  }
+
+  .mat-checkbox-layout{
+    cursor: inherit;
+    align-items: baseline;
+    vertical-align: middle;
+    display: inline-flex;
+    white-space: nowrap;
+    margin-left: 110px;
+  }
+  .btsave{
+      margin-left: 45%;
+  }

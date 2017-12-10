@@ -1,0 +1,22 @@
+
+<h2>User Form</h2>
+
+
+
+<br/>
+<input type="text"  class="form-control" (keyup.Enter)="addUser(newname)" #newname
+/>
+
+<ul class="list-group">
+
+  <li *ngFor="let list of value"
+   class="list-group-item">
+       
+         {{list.name}}
+         {{list.id}}
+         {{list.description}}
+         {{list.disabled}}
+
+         <button class="btn btn-danger btn-sm" (click) ="delete(list)">Delete</button>
+  </li>
+</ul>

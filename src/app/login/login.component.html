@@ -1,0 +1,42 @@
+
+
+  <button  (click)="logout()" class="btn btn-primary pull-right btn-sm RbtnMargin" >LogOut</button>
+
+<div class="container">
+  <form [formGroup]="rForm" (ngSubmit)="login(rForm.value)">
+      <div class="form-container">
+        <div class="row columns">
+  
+          <h1>My Reactive Form</h1>
+  
+          <label>Name</label>
+          
+            <input matInput formControlName="name" class="form-control"/>
+          
+          <div class="alert" *ngIf="!rForm.controls['name'].valid && rForm.controls['name'].touched">you must provide name between 4 and 20 char</div>
+  
+  <br/>
+          <label>Description</label>
+            <input matInput formControlName="description" class="form-control"/>
+           
+          
+          <div class="alert" *ngIf="!rForm.controls['description'].valid && rForm.controls['description'].touched">You must specify a description that's between 30 and 500 characters.</div>
+          <br/>
+          <div class="mat-form-field-wrapper">
+          <mat-form-field class="mat-form-field-infix">
+            <mat-select placeholder="Select">
+              <mat-option value="option">Option</mat-option>
+            </mat-select>
+          </mat-form-field>
+</div>
+          <br/>
+
+          <div><mat-checkbox>Remember me </mat-checkbox></div><br/>
+          <input type="submit" class="btn btn-primary" value="Submit Form" [disabled]="!rForm.valid">
+          <div *ngIf="invalid" class="alert alert-danger">invalid username or password </div>
+                </div>
+      </div>
+      
+    </form>
+  </div>
+

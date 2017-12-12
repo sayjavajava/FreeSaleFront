@@ -15,13 +15,11 @@ import {observable} from 'rxjs/symbol/observable';
 
 
 @Injectable()
-export class DataService {
+export class ProductService  {
 
-//  private UrlSource = 'http://localhost:8080/allheros';
-
-
-private constr :string;
-  constructor(private UrlSource :string ,private http: Http,private authenticationservice :AuthenticationService,private httpclient:HttpClient) {
+  private UrlSource='/api/product';
+  //private constr :string;
+  constructor(private http: Http,private authenticationservice :AuthenticationService,private httpclient:HttpClient) {
     
   }
    getAll() {
@@ -83,5 +81,5 @@ private handleError(error:Response){
       return this.httpclient.request(req);
     }
   
-
-}
+  }
+  

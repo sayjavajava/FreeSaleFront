@@ -5,12 +5,12 @@ import { Injectable, OnInit } from '@angular/core';
 import { DataService } from './DataService';
 
 @Injectable()
-export class UserService extends DataService  {
- private  autservice :AuthenticationService
+export class CategoryService extends DataService  {
+ private  auth :AuthenticationService
  
 
   constructor(http:Http,authservice:AuthenticationService,httpclient:HttpClient) {
-   super('/api/user',http,authservice,httpclient);
+   super('/api/allCategories',http,authservice,httpclient);
   }
 
 

@@ -1,3 +1,6 @@
+import { ProductService } from './services/product.service';
+import { CategoryComponent } from './category/category.component';
+ import { UploadFileService } from './services/upload-file.service';
 import { ProductComponent } from './product/product.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
@@ -14,6 +17,8 @@ import {HttpModule} from '@angular/http';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import {AppErrorHandler} from './common/AppErrorHandler';
+import {TokenInterceptor} from './common/TokenInterceptor';
+
 import { Routes, RouterModule } from '@angular/router';
 import {FlexLayoutModule} from "@angular/flex-layout";
 
@@ -26,6 +31,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CategoryService } from './services/category.service';
+
 
 @NgModule(<NgModule>{
   declarations: [
@@ -34,11 +42,13 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     LoginComponent,
     NavbarComponent,
     ProductComponent,
+    CategoryComponent
     
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
@@ -61,7 +71,12 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HttpModule,
     
   ],
-  providers: [UserService,AuthenticationService,
+  providers: [UserService,AuthenticationService,UploadFileService,CategoryService,ProductService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent],

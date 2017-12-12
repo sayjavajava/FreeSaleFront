@@ -1,3 +1,4 @@
+import { CategoryService } from './../services/category.service';
 import { NotFound } from './../common/NotFound';
 import { AppError } from './../common/AppError';
 import { BadRequest } from './../common/BadRequest';
@@ -6,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions,Headers } from '@angular/http';
 
 @Component({
-  selector: 'app-user',
+  selector: 'user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
 
   value: any[];
-  //private UrlSource = "http://localhost:8080/allheros";
+  //private UrlSource = "api/allheros";
   constructor( private userservice:UserService) { 
      }
 
@@ -59,11 +60,8 @@ export class UserComponent implements OnInit {
 
 }
 
-
-
-
    ngOnInit() {
-    this.userservice.getAll().subscribe(res => this.value = res);
+   // this.userservice.getAll().subscribe(res => this.value = res);
   
   }
 

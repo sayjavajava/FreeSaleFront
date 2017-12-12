@@ -36,8 +36,11 @@
    width: 50%;  
    margin-top: 15px;
    padding-left: 10%; 
-
-  }
+}
+.label{
+  margin-left: 10%;
+  max-width: 20%;
+}
 
   .mat-checkbox-layout{
     cursor: inherit;

@@ -123,3 +123,8 @@ body{
   margin-top: 85px;
   margin-bottom: 300px;
 }
+
+
+mat-icon{
+  color: purple;
+}

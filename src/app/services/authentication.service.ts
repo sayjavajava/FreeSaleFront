@@ -1,21 +1,26 @@
+import { HttpClient } from '@angular/common/http';
+import { observable } from 'rxjs/symbol/observable';
+import { Authority } from './../common/Authority';
 import { Observable } from 'rxjs/Observable';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class AuthenticationService {
 
   private authUrl = '/api/auth';
   private headers = new Headers({'Content-Type': 'application/json'});
-
+  
   constructor(private http: Http) {
   
   }
 
   login(username: string, password: string): Observable<boolean> {
+      // {headers: this.headers}
       return this.http.post(this.authUrl, JSON.stringify({username: username, password: password}), {headers: this.headers})
           .map((response: Response) => {
               // login successful if there's a jwt token in the response
@@ -45,5 +50,32 @@ export class AuthenticationService {
       localStorage.removeItem('currentUser');
       console.log('i am logged out ');
   }
+  isLoggedIn():boolean{
+    let token =localStorage.getItem('currentUser') ;
+    if(token){   return true}
+    return false;
+  }
+currentUser(){
+    const headers = new Headers({ 'Content-Type': 'application/json',
+    'Authorization':'Bearer'+ this.getToken()
+    });
+    const options = new RequestOptions({ headers: headers });
 
+    let token =localStorage.getItem('currentUser') ;
+    if(token){   
+    return this.http.get('api/credentials',options)
+    .map(response => response.json());
+    }
+}
+
+ isAdmin(){
+    const headers = new Headers({ 'Content-Type': 'application/json',
+    'Authorization':'Bearer'+ this.getToken()
+    });
+    const options = new RequestOptions({ headers: headers });
+
+    let token =localStorage.getItem('currentUser') ;
+    if(token){   
+    return this.http.get('/api/isAdmin',options).map(response =>response.json());
+}}
 }

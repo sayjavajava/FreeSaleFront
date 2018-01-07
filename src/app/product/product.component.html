@@ -7,24 +7,32 @@
     <input matInput #input maxlength="15" placeholder="Product Name" formControlName="name"/>
     <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint>
   </mat-form-field>
- <div class="alert" *ngIf="!rForm.controls['name'].valid && rForm.controls['name'].touched">you must provide name between 4 and 15 char</div>
-<br/>
+ <div class="alert alert-danger" *ngIf="!rForm.controls['name'].valid && rForm.controls['name'].touched">
+   <div *ngIf="rForm.controls['name'].errors.minlength">name should contain atleast 4 characters </div>
+   <div *ngIf="rForm.controls['name'].errors.required">Name is required </div>
+   
+  </div>
 
-
+ <br/>
 <mat-form-field hintLabel="unique">
   <input matInput #input maxlength="15" placeholder="sku" formControlName="sku"/>
   <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint>
 </mat-form-field>
-<div class="alert" *ngIf="!rForm.controls['name'].valid && rForm.controls['name'].touched">you must provide name between 4 and 15 char</div>
+<div class="alert alert-danger"  *ngIf="rForm.get('sku').touched && rForm.get('sku').invalid">
+<div *ngIf="rForm.get('sku').errors.required">sku can not be null </div>
+<div *ngIf="rForm.get('sku').errors.SkuExists">{{input.value}} it is already existing </div>
+</div>
 <br/>
-
-
 <mat-form-field hintLabel="Max 20 characters">
   <input matInput #input maxlength="20" placeholder="Product Description" formControlName="description"/>
   <mat-hint align="end">{{input.value?.length || 0}}/20</mat-hint>
 </mat-form-field>
-<div class="alert" *ngIf="!rForm.controls['description'].valid && rForm.controls['description'].touched">you must provide name between 8 and 20 char</div>
-<br/>
+<div class="alert alert-danger" *ngIf="!rForm.controls['description'].valid && rForm.controls['description'].touched">
+    <div *ngIf="rForm.controls['description'].errors.minlength">minimum should be 8   </div>
+    <div *ngIf="rForm.controls['description'].errors.required">Description is required </div>
+    
+</div>
+<br/> 
 <mat-form-field>
     <mat-select formControlName="selectedCategory" placeholder="Select category">
      <mat-option
@@ -34,20 +42,25 @@
     </mat-select>
     <mat-hint align="end">Tech items</mat-hint>
   </mat-form-field>
-<br/>
+  <div class="alert alert-danger" *ngIf="!rForm.controls['selectedCategory'].valid && rForm.controls['selectedCategory'].touched">select category</div>
+     
+  <br/>
 
-<br/>
 <mat-form-field hintLabel="Max 15 characters">
   <input type="number" matInput #input maxlength="10" placeholder="Price" formControlName="price"/>
   <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
 </mat-form-field>
-<div class="alert" *ngIf="!rForm.controls['price'].valid && rForm.controls['price'].touched">Minimum amout should be 10</div>
+<div class="alert alert-danger" *ngIf="!rForm.controls['price'].valid && rForm.controls['price'].touched">
+    <div *ngIf="rForm.controls['price'].errors.minlength">Can not less than 10    </div>
+    <div *ngIf="rForm.controls['price'].errors.required">Price is required  </div>
+  
+  
+</div>
 <br/>
 
   <mat-checkbox class="mat-checkbox-layout " formControlName="InStock"> in stock
   </mat-checkbox>
   <br/>
-
 
 <mat-form-field>
       <mat-select formControlName="quantity" placeholder="Select quantity">
@@ -58,7 +71,8 @@
       </mat-select>
       <mat-hint align="end">Tech items</mat-hint>
     </mat-form-field>
-
+    <div class="alert alert-danger" *ngIf="!rForm.controls['quantity'].valid && rForm.controls['quantity'].touched">select Quantity</div>
+    
     <br/>
 <div *ngIf="currentFileUpload" class="progress">
 	<div class="progress-bar progress-bar-info progress-bar-striped"
@@ -70,12 +84,13 @@
 <label class="btn btn-default label">
 	<input type="file" (change)="selectFile($event)">
 </label>
-
+<input type="hidden" formControlName="originalFileName">
 <br/>
 </div>
 <br/>
 <button  type="submit" class="btn btn-primary btsave" >save</button>
 
-<div *ngIf="submitted" class="alert-info">Product is saved successfully</div>
+
+<div *ngIf="submitted" color="warn" class="alert-info">Product is saved successfully</div>
 </form>
 
